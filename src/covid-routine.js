@@ -8,6 +8,19 @@ import {
   PERCENTAGE_CASES_NEEDS_FOR_VENTILATION
 } from './constants';
 
+// let sampleCaseData = {
+//   region: {
+//     name: 'Africa',
+//     avgAge: 19.7,
+//     avgDailyIncomeInUSD: 5,
+//     avgDailyIncomePopulation: 0.71
+//   },
+//   periodType: 'days',
+//   timeToElapse: 58,
+//   reportedCases: 674,
+//   population: 66622705,
+//   totalHospitalBeds: 1380614
+// };
 let sampleCaseData = {};
 let estimatesdDataStored = {};
 
@@ -184,10 +197,8 @@ function initCovidEstimator(data) {
     sampleCaseData = data;
     estimatesdDataStored = {
       data: sampleCaseData, // the input data you got
-      estimate: {
-        impact: {}, // your best case estimation
-        severeImpact: {} // your severe case estimation
-      }
+      impact: {}, // your best case estimation
+      severeImpact: {} // your severe case estimation
     };
     // compute code challenge -1
     calculateCurrentlyInfected();
@@ -203,7 +214,7 @@ function initCovidEstimator(data) {
     calculateCostImapctOnEconomy();
 
     // return responses
-    // console.log('Results', estimatesdDataStored);
+    //   console.log('Results', estimatesdDataStored);
     return estimatesdDataStored;
   }
   throw new Error('Error in data Entry');

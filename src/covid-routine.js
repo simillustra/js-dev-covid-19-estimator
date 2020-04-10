@@ -164,10 +164,10 @@ function calculationICURequirement() {
 
 function calculateVentilatorsRequired() {
   // update impact
-  const saveNormalCasesNeedingVentilators = Math.trunc(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_VENTILATION);
+  const saveNormalCasesNeedingVentilators = Math.round(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_VENTILATION);
   estimatesdDataStored.impact.casesForVentilatorsByRequestedTime = saveNormalCasesNeedingVentilators;
   // update severeImpact
-  const saveSeverCasesNeedingVentilators = Math.trunc(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_VENTILATION);
+  const saveSeverCasesNeedingVentilators = Math.round(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_VENTILATION);
   estimatesdDataStored.severeImpact.casesForVentilatorsByRequestedTime = saveSeverCasesNeedingVentilators;
 }
 

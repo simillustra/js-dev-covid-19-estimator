@@ -184,8 +184,10 @@ function initCovidEstimator(data) {
     sampleCaseData = data;
     estimatesdDataStored = {
       data: sampleCaseData, // the input data you got
-      impact: {}, // your best case estimation
-      severeImpact: {} // your severe case estimation
+      estimate: {
+        impact: {}, // your best case estimation
+        severeImpact: {} // your severe case estimation
+      }
     };
     // compute code challenge -1
     calculateCurrentlyInfected();

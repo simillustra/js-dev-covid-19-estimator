@@ -25,26 +25,26 @@ let sampleCaseData = {};
 let estimatesdDataStored = {};
 
 /**
-   * @function calculateCurrentlyInfected
-   * @param sampleCaseData
-   * @returns currentlyInfected
-   * @description estimates and saves  the number of currently and severly infected people
-   */
+ * @function calculateCurrentlyInfected
+ * @param sampleCaseData
+ * @returns currentlyInfected
+ * @description estimates and saves  the number of currently and severly infected people
+ */
 function calculateCurrentlyInfected() {
   // update impact
   const saveCurrentlyInfected = sampleCaseData.reportedCases * NORMAL_INFECTION_GROWTH_RATE;
-  estimatesdDataStored.estimate.impact.currentlyInfected = saveCurrentlyInfected;
+  estimatesdDataStored.impact.currentlyInfected = saveCurrentlyInfected;
   // update severeImpact
   const saveSeverelyInfected = sampleCaseData.reportedCases * SEVERE_INFECTION_GROWTH_RATE;
-  estimatesdDataStored.estimate.severeImpact.currentlyInfected = saveSeverelyInfected;
+  estimatesdDataStored.severeImpact.currentlyInfected = saveSeverelyInfected;
 }
 
 /**
-   * @function calculateInfectionRatesPerPeriod
-   * @params numberOfDays, periodType
-   * @returns infectionRatioPerPeriod
-   * @description normalise the duration input to days, and then do your computation based on periods in days, weeks and months.
-   */
+ * @function calculateInfectionRatesPerPeriod
+ * @params numberOfDays, periodType
+ * @returns infectionRatioPerPeriod
+ * @description normalise the duration input to days, and then do your computation based on periods in days, weeks and months.
+ */
 
 function calculateInfectionRatesPerPeriod(numberOfDays, periodType) {
   let infectionRatioPerPeriod = 0;
@@ -65,106 +65,106 @@ function calculateInfectionRatesPerPeriod(numberOfDays, periodType) {
 }
 
 /**
-   * @function calculatePossibleInfectionGrowthRate
-   * @param sampleCaseData
-   * @returns infectionsByRequestedTime
-   * @description To estimate the number of infected people 30 days from now,
-   */
+ * @function calculatePossibleInfectionGrowthRate
+ * @param sampleCaseData
+ * @returns infectionsByRequestedTime
+ * @description To estimate the number of infected people 30 days from now,
+ */
 
 function calculatePossibleInfectionGrowthRate() {
   const INFECTION_RATE_PER_PERIOD = calculateInfectionRatesPerPeriod(sampleCaseData.timeToElapse, sampleCaseData.periodType);
   // update impact
-  const saveNormalSpreadRate = estimatesdDataStored.estimate.impact.currentlyInfected * INFECTION_RATE_PER_PERIOD;
-  estimatesdDataStored.estimate.impact.infectionsByRequestedTime = saveNormalSpreadRate;
+  const saveNormalSpreadRate = estimatesdDataStored.impact.currentlyInfected * INFECTION_RATE_PER_PERIOD;
+  estimatesdDataStored.impact.infectionsByRequestedTime = saveNormalSpreadRate;
   // update severeImpact
-  const saveSevereSpreadRate = estimatesdDataStored.estimate.severeImpact.currentlyInfected * INFECTION_RATE_PER_PERIOD;
-  estimatesdDataStored.estimate.severeImpact.infectionsByRequestedTime = saveSevereSpreadRate;
+  const saveSevereSpreadRate = estimatesdDataStored.severeImpact.currentlyInfected * INFECTION_RATE_PER_PERIOD;
+  estimatesdDataStored.severeImpact.infectionsByRequestedTime = saveSevereSpreadRate;
 }
 
 /**
-   * @function calculateSevereCases
-   * @param sampleCaseData
-   * @returns severeCasesByRequestedTime
-   * @description This is the estimated number of severe positive cases that will require hospitalization to recover.
-   */
+ * @function calculateSevereCases
+ * @param sampleCaseData
+ * @returns severeCasesByRequestedTime
+ * @description This is the estimated number of severe positive cases that will require hospitalization to recover.
+ */
 
 function calculateSevereCases() {
   // update impact
-  const estimatedNormalPositive = estimatesdDataStored.estimate.impact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES;
-  estimatesdDataStored.estimate.impact.severeCasesByRequestedTime = estimatedNormalPositive;
+  const estimatedNormalPositive = estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES;
+  estimatesdDataStored.impact.severeCasesByRequestedTime = estimatedNormalPositive;
 
   // update severeImpact
-  const estimatedSeverePositive = estimatesdDataStored.estimate.severeImpact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES;
-  estimatesdDataStored.estimate.severeImpact.severeCasesByRequestedTime = estimatedSeverePositive;
+  const estimatedSeverePositive = estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES;
+  estimatesdDataStored.severeImpact.severeCasesByRequestedTime = estimatedSeverePositive;
 }
 
 /**
-   * @function caclulatHospitalBedsAvailability
-   * @param sampleCaseData
-   * @returns hospitalBedsByRequestedTime
-   * @description This is the estimated a 35% bed availability in hospitals for severe COVID-19 positive patients.
-   */
+ * @function caclulatHospitalBedsAvailability
+ * @param sampleCaseData
+ * @returns hospitalBedsByRequestedTime
+ * @description This is the estimated a 35% bed availability in hospitals for severe COVID-19 positive patients.
+ */
 
 function caclulateHospitalBedsAvailability() {
   // update impact
   const HOSPITAL_BEDS_AVAILABLE = sampleCaseData.totalHospitalBeds * PERCENTAGE_HOSPITAL_BED_AVAILABILITY;
-  const saveNormalHospitalBedAvailable = estimatesdDataStored.estimate.impact.severeCasesByRequestedTime - HOSPITAL_BEDS_AVAILABLE;
-  estimatesdDataStored.estimate.impact.hospitalBedsByRequestedTime = saveNormalHospitalBedAvailable;
+  const saveNormalHospitalBedAvailable = estimatesdDataStored.impact.severeCasesByRequestedTime - HOSPITAL_BEDS_AVAILABLE;
+  estimatesdDataStored.impact.hospitalBedsByRequestedTime = saveNormalHospitalBedAvailable;
   // update severeImpact
-  const saveSevereHospitalBedAvailable = estimatesdDataStored.estimate.severeImpact.severeCasesByRequestedTime - HOSPITAL_BEDS_AVAILABLE;
-  estimatesdDataStored.estimate.severeImpact.hospitalBedsByRequestedTime = saveSevereHospitalBedAvailable;
+  const saveSevereHospitalBedAvailable = estimatesdDataStored.severeImpact.severeCasesByRequestedTime - HOSPITAL_BEDS_AVAILABLE;
+  estimatesdDataStored.severeImpact.hospitalBedsByRequestedTime = saveSevereHospitalBedAvailable;
 }
 
 /**
-   * @function calculationICURequirement
-   * @param sampleCaseData
-   * @returns casesForICUByRequestedTime
-   * @description This is the estimated number of severe positive cases that will require ICU care.
-   */
+ * @function calculationICURequirement
+ * @param sampleCaseData
+ * @returns casesForICUByRequestedTime
+ * @description This is the estimated number of severe positive cases that will require ICU care.
+ */
 
 function calculationICURequirement() {
   // update impact
-  const saveNormalCasesNeadingICUCare = estimatesdDataStored.estimate.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE;
-  estimatesdDataStored.estimate.impact.casesForICUByRequestedTime = saveNormalCasesNeadingICUCare;
+  const saveNormalCasesNeadingICUCare = estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE;
+  estimatesdDataStored.impact.casesForICUByRequestedTime = saveNormalCasesNeadingICUCare;
   // update severeImpact
-  const saveSeverCasesNeadingICUCare = estimatesdDataStored.estimate.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE;
-  estimatesdDataStored.estimate.severeImpact.casesForICUByRequestedTime = saveSeverCasesNeadingICUCare;
+  const saveSeverCasesNeadingICUCare = estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE;
+  estimatesdDataStored.severeImpact.casesForICUByRequestedTime = saveSeverCasesNeadingICUCare;
 }
 
 /**
-   * @function calculateVentilatorsRequired
-   * @param sampleCaseData
-   * @returns casesForVentilatorsByRequestedTime
-   * @description This is the estimated number of severe positive cases that will require ventilators
-   */
+ * @function calculateVentilatorsRequired
+ * @param sampleCaseData
+ * @returns casesForVentilatorsByRequestedTime
+ * @description This is the estimated number of severe positive cases that will require ventilators
+ */
 
 function calculateVentilatorsRequired() {
   // update impact
-  const saveNormalCasesNeedingVentilators = estimatesdDataStored.estimate.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_VENTILATION;
-  estimatesdDataStored.estimate.impact.casesForVentilatorsByRequestedTime = saveNormalCasesNeedingVentilators;
+  const saveNormalCasesNeedingVentilators = estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_VENTILATION;
+  estimatesdDataStored.impact.casesForVentilatorsByRequestedTime = saveNormalCasesNeedingVentilators;
   // update severeImpact
-  const saveSeverCasesNeedingVentilators = estimatesdDataStored.estimate.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_VENTILATION;
-  estimatesdDataStored.estimate.severeImpact.casesForVentilatorsByRequestedTime = saveSeverCasesNeedingVentilators;
+  const saveSeverCasesNeedingVentilators = estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_VENTILATION;
+  estimatesdDataStored.severeImpact.casesForVentilatorsByRequestedTime = saveSeverCasesNeedingVentilators;
 }
 
 /**
-   * @function calculateCostImapctOnEconomy
-   * @param sampleCaseData
-   * @returns dollarsInFlight
-   * @description estimate how much money the economy is likely to lose over the said period.
-   */
+ * @function calculateCostImapctOnEconomy
+ * @param sampleCaseData
+ * @returns dollarsInFlight
+ * @description estimate how much money the economy is likely to lose over the said period.
+ */
 
 function calculateCostImapctOnEconomy() {
   const MAJORITIY_WORKING_POPULATION = sampleCaseData.region.avgDailyIncomePopulation;
   const DAILY_EARNINGS = sampleCaseData.region.avgDailyIncomeInUSD;
   const PERIOD_IN_FOCUS = 30;
   // update impact
-  const saveNormalDollarsInFlight = estimatesdDataStored.estimate.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION
-      * DAILY_EARNINGS * PERIOD_IN_FOCUS;
-  estimatesdDataStored.estimate.impact.dollarsInFlight = saveNormalDollarsInFlight;
+  const saveNormalDollarsInFlight = estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION
+    * DAILY_EARNINGS * PERIOD_IN_FOCUS;
+  estimatesdDataStored.impact.dollarsInFlight = saveNormalDollarsInFlight;
   // update severeImpact
-  const saveSeverDollarInFlight = estimatesdDataStored.estimate.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION * DAILY_EARNINGS * PERIOD_IN_FOCUS;
-  estimatesdDataStored.estimate.severeImpact.dollarsInFlight = saveSeverDollarInFlight;
+  const saveSeverDollarInFlight = estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION * DAILY_EARNINGS * PERIOD_IN_FOCUS;
+  estimatesdDataStored.severeImpact.dollarsInFlight = saveSeverDollarInFlight;
 }
 
 function initCovidEstimator(data) {
@@ -173,10 +173,8 @@ function initCovidEstimator(data) {
     sampleCaseData = data;
     estimatesdDataStored = {
       data: sampleCaseData, // the input data you got
-      estimate: {
-        impact: {}, // your best case estimation
-        severeImpact: {} // your severe case estimation
-      }
+      impact: {}, // your best case estimation
+      severeImpact: {} // your severe case estimation
     };
     // compute code challenge -1
     calculateCurrentlyInfected();

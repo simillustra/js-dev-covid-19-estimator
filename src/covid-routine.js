@@ -148,10 +148,10 @@ function caclulateHospitalBedsAvailability() {
 
 function calculationICURequirement() {
   // update impact
-  const saveNormalCasesNeadingICUCare = estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE;
+  const saveNormalCasesNeadingICUCare = Math.round(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
   estimatesdDataStored.impact.casesForICUByRequestedTime = saveNormalCasesNeadingICUCare;
   // update severeImpact
-  const saveSeverCasesNeadingICUCare = estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE;
+  const saveSeverCasesNeadingICUCare = Math.round(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
   estimatesdDataStored.severeImpact.casesForICUByRequestedTime = saveSeverCasesNeadingICUCare;
 }
 
@@ -179,15 +179,15 @@ function calculateVentilatorsRequired() {
    */
 
 function calculateCostImapctOnEconomy() {
+  const PERIOD_IN_FOCUS = calculateIAndReturnPeriods(sampleCaseData.timeToElapse, sampleCaseData.periodType);
   const MAJORITIY_WORKING_POPULATION = sampleCaseData.region.avgDailyIncomePopulation;
   const DAILY_EARNINGS = sampleCaseData.region.avgDailyIncomeInUSD;
-  const PERIOD_IN_FOCUS = calculateIAndReturnPeriods(sampleCaseData.timeToElapse, sampleCaseData.periodType);
+
   // update impact
-  const saveNormalDollarsInFlight = Math.round(estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION
-      * DAILY_EARNINGS * PERIOD_IN_FOCUS);
+  const saveNormalDollarsInFlight = Math.round((estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS) * 10) / 10;
   estimatesdDataStored.impact.dollarsInFlight = saveNormalDollarsInFlight;
   // update severeImpact
-  const saveSeverDollarInFlight = Math.round(estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION * DAILY_EARNINGS * PERIOD_IN_FOCUS);
+  const saveSeverDollarInFlight = Math.round((estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS) * 10) / 10;
   estimatesdDataStored.severeImpact.dollarsInFlight = saveSeverDollarInFlight;
 }
 

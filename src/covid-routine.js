@@ -78,11 +78,11 @@ function calculateIAndReturnPeriods(numberOfDays, periodType) {
       infectionRatioPerPeriod = numberOfDays;
       break;
     case 'weeks':
-      infectionRatioPerPeriod = (numberOfDays * 7);
+      infectionRatioPerPeriod = (Math.trunc(numberOfDays / 7));
       break;
 
     default:
-      infectionRatioPerPeriod = (numberOfDays * 30);
+      infectionRatioPerPeriod = (Math.trunc(numberOfDays / 30));
       break;
   }
 
@@ -184,10 +184,10 @@ function calculateCostImapctOnEconomy() {
   const DAILY_EARNINGS = sampleCaseData.region.avgDailyIncomeInUSD;
 
   // update impact
-  const saveNormalDollarsInFlight = Math.trunc((estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS) * 10) / 10;
+  const saveNormalDollarsInFlight = Math.trunc((estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS));
   estimatesdDataStored.impact.dollarsInFlight = saveNormalDollarsInFlight;
   // update severeImpact
-  const saveSeverDollarInFlight = Math.trunc((estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS) * 10) / 10;
+  const saveSeverDollarInFlight = Math.trunc((estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS));
   estimatesdDataStored.severeImpact.dollarsInFlight = saveSeverDollarInFlight;
 }
 

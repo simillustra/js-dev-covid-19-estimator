@@ -78,11 +78,11 @@ function calculateIAndReturnPeriods(numberOfDays, periodType) {
       infectionRatioPerPeriod = numberOfDays;
       break;
     case 'weeks':
-      infectionRatioPerPeriod = (numberOfDays * 7);
+      infectionRatioPerPeriod = (Math.truc(numberOfDays * 7));
       break;
 
     default:
-      infectionRatioPerPeriod = (numberOfDays * 30);
+      infectionRatioPerPeriod = (Math.truc(numberOfDays * 30));
       break;
   }
 
@@ -114,11 +114,11 @@ function calculatePossibleInfectionGrowthRate() {
 
 function calculateSevereCases() {
   // update impact
-  const estimatedNormalPositive = estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES;
+  const estimatedNormalPositive = Math.trunc(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES);
   estimatesdDataStored.impact.severeCasesByRequestedTime = estimatedNormalPositive;
 
   // update severeImpact
-  const estimatedSeverePositive = estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES;
+  const estimatedSeverePositive = Math.trunc(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES);
   estimatesdDataStored.severeImpact.severeCasesByRequestedTime = estimatedSeverePositive;
 }
 
@@ -148,10 +148,10 @@ function caclulateHospitalBedsAvailability() {
 
 function calculationICURequirement() {
   // update impact
-  const saveNormalCasesNeadingICUCare = Math.round(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
+  const saveNormalCasesNeadingICUCare = Math.trunc(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
   estimatesdDataStored.impact.casesForICUByRequestedTime = saveNormalCasesNeadingICUCare;
   // update severeImpact
-  const saveSeverCasesNeadingICUCare = Math.round(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
+  const saveSeverCasesNeadingICUCare = Math.trunc(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
   estimatesdDataStored.severeImpact.casesForICUByRequestedTime = saveSeverCasesNeadingICUCare;
 }
 
@@ -184,10 +184,10 @@ function calculateCostImapctOnEconomy() {
   const DAILY_EARNINGS = sampleCaseData.region.avgDailyIncomeInUSD;
 
   // update impact
-  const saveNormalDollarsInFlight = Math.round((estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS) * 10) / 10;
+  const saveNormalDollarsInFlight = Math.trunc((estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS));
   estimatesdDataStored.impact.dollarsInFlight = saveNormalDollarsInFlight;
   // update severeImpact
-  const saveSeverDollarInFlight = Math.round((estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS) * 10) / 10;
+  const saveSeverDollarInFlight = Math.trunc((estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS));
   estimatesdDataStored.severeImpact.dollarsInFlight = saveSeverDollarInFlight;
 }
 

@@ -200,6 +200,7 @@ function initCovidEstimator(data) {
       impact: {}, // your best case estimation
       severeImpact: {} // your severe case estimation
     };
+
     // compute code challenge -1
     calculateCurrentlyInfected();
     calculatePossibleInfectionGrowthRate();
@@ -214,7 +215,6 @@ function initCovidEstimator(data) {
     calculateCostImapctOnEconomy();
 
     // return responses
-    //   console.log('Results', estimatesdDataStored);
     return estimatesdDataStored;
   }
   throw new Error('Error in data Entry');

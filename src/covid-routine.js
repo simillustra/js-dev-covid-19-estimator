@@ -114,11 +114,11 @@ function calculatePossibleInfectionGrowthRate() {
 
 function calculateSevereCases() {
   // update impact
-  const estimatedNormalPositive = Math.trunc(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES);
+  const estimatedNormalPositive = (estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES);
   estimatesdDataStored.impact.severeCasesByRequestedTime = estimatedNormalPositive;
 
   // update severeImpact
-  const estimatedSeverePositive = Math.trunc(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES);
+  const estimatedSeverePositive = (estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES);
   estimatesdDataStored.severeImpact.severeCasesByRequestedTime = estimatedSeverePositive;
 }
 
@@ -148,10 +148,10 @@ function caclulateHospitalBedsAvailability() {
 
 function calculationICURequirement() {
   // update impact
-  const saveNormalCasesNeadingICUCare = Math.trunc(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
+  const saveNormalCasesNeadingICUCare = (estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
   estimatesdDataStored.impact.casesForICUByRequestedTime = saveNormalCasesNeadingICUCare;
   // update severeImpact
-  const saveSeverCasesNeadingICUCare = Math.trunc(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
+  const saveSeverCasesNeadingICUCare = (estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
   estimatesdDataStored.severeImpact.casesForICUByRequestedTime = saveSeverCasesNeadingICUCare;
 }
 

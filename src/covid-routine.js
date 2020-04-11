@@ -78,11 +78,11 @@ function calculateIAndReturnPeriods(numberOfDays, periodType) {
       infectionRatioPerPeriod = numberOfDays;
       break;
     case 'weeks':
-      infectionRatioPerPeriod = (Math.truc(numberOfDays * 7));
+      infectionRatioPerPeriod = (numberOfDays * 7);
       break;
 
     default:
-      infectionRatioPerPeriod = (Math.truc(numberOfDays * 30));
+      infectionRatioPerPeriod = (numberOfDays * 30);
       break;
   }
 

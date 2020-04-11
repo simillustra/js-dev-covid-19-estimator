@@ -1,4 +1,4 @@
-// Defining covid-19 constants
+// Defining covid-19 constants..........
 export const NORMAL_INFECTION_GROWTH_RATE = 10;
 export const SEVERE_INFECTION_GROWTH_RATE = 50;
 export const PERCENTAGE_POSITIVE_CASES = (15 / 100);

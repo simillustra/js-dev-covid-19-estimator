@@ -114,11 +114,11 @@ function calculatePossibleInfectionGrowthRate() {
 
 function calculateSevereCases() {
   // update impact
-  const estimatedNormalPositive = (estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES);
+  const estimatedNormalPositive = estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES;
   estimatesdDataStored.impact.severeCasesByRequestedTime = estimatedNormalPositive;
 
   // update severeImpact
-  const estimatedSeverePositive = (estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES);
+  const estimatedSeverePositive = estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_POSITIVE_CASES;
   estimatesdDataStored.severeImpact.severeCasesByRequestedTime = estimatedSeverePositive;
 }
 
@@ -148,10 +148,10 @@ function caclulateHospitalBedsAvailability() {
 
 function calculationICURequirement() {
   // update impact
-  const saveNormalCasesNeadingICUCare = (estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
+  const saveNormalCasesNeadingICUCare = Math.trunc(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
   estimatesdDataStored.impact.casesForICUByRequestedTime = saveNormalCasesNeadingICUCare;
   // update severeImpact
-  const saveSeverCasesNeadingICUCare = (estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
+  const saveSeverCasesNeadingICUCare = Math.trunc(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
   estimatesdDataStored.severeImpact.casesForICUByRequestedTime = saveSeverCasesNeadingICUCare;
 }
 
@@ -184,10 +184,10 @@ function calculateCostImapctOnEconomy() {
   const DAILY_EARNINGS = sampleCaseData.region.avgDailyIncomeInUSD;
 
   // update impact
-  const saveNormalDollarsInFlight = Math.trunc((estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS));
+  const saveNormalDollarsInFlight = Math.trunc((estimatesdDataStored.impact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS) * 10) / 10;
   estimatesdDataStored.impact.dollarsInFlight = saveNormalDollarsInFlight;
   // update severeImpact
-  const saveSeverDollarInFlight = Math.trunc((estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS));
+  const saveSeverDollarInFlight = Math.trunc((estimatesdDataStored.severeImpact.infectionsByRequestedTime * MAJORITIY_WORKING_POPULATION) * (DAILY_EARNINGS * PERIOD_IN_FOCUS) * 10) / 10;
   estimatesdDataStored.severeImpact.dollarsInFlight = saveSeverDollarInFlight;
 }
 

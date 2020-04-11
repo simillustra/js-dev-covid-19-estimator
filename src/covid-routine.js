@@ -30,6 +30,7 @@ let estimatesdDataStored = {};
    * @returns currentlyInfected
    * @description estimates and saves  the number of currently and severly infected people
    */
+
 function calculateCurrentlyInfected() {
   // update impact
   const saveCurrentlyInfected = sampleCaseData.reportedCases * NORMAL_INFECTION_GROWTH_RATE;
@@ -88,6 +89,7 @@ function calculateIAndReturnPeriods(numberOfDays, periodType) {
 
   return infectionRatioPerPeriod;
 }
+
 /**
    * @function calculatePossibleInfectionGrowthRate
    * @param sampleCaseData

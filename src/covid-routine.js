@@ -112,13 +112,13 @@ function calculateSevereCases() {
 }
 
 /**
-   * @function caclulatHospitalBedsAvailability
+   * @function calculateHospitalBedsAvailability
    * @param sampleCaseData
    * @returns hospitalBedsByRequestedTime
    * @description This is the estimated a 35% bed availability in hospitals for severe COVID-19 positive patients.
    */
 
-function caclulateHospitalBedsAvailability() {
+function calculateHospitalBedsAvailability() {
   // update impact
   const HOSPITAL_BEDS_AVAILABLE = sampleCaseData.totalHospitalBeds * PERCENTAGE_HOSPITAL_BED_AVAILABILITY;
   const saveNormalHospitalBedAvailable = Math.trunc(HOSPITAL_BEDS_AVAILABLE - estimatesdDataStored.impact.severeCasesByRequestedTime);
@@ -137,11 +137,11 @@ function caclulateHospitalBedsAvailability() {
 
 function calculationICURequirement() {
   // update impact
-  const saveNormalCasesNeadingICUCare = Math.trunc(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
-  estimatesdDataStored.impact.casesForICUByRequestedTime = saveNormalCasesNeadingICUCare;
+  const saveNormalCasesNeedingICUCare = Math.trunc(estimatesdDataStored.impact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
+  estimatesdDataStored.impact.casesForICUByRequestedTime = saveNormalCasesNeedingICUCare;
   // update severeImpact
-  const saveSeverCasesNeadingICUCare = Math.trunc(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
-  estimatesdDataStored.severeImpact.casesForICUByRequestedTime = saveSeverCasesNeadingICUCare;
+  const saveSeverCasesNeedingICUCare = Math.trunc(estimatesdDataStored.severeImpact.infectionsByRequestedTime * PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE);
+  estimatesdDataStored.severeImpact.casesForICUByRequestedTime = saveSeverCasesNeedingICUCare;
 }
 
 /**
@@ -196,7 +196,7 @@ function initCovidEstimator(data) {
 
     // compute code challenge -2
     calculateSevereCases();
-    caclulateHospitalBedsAvailability();
+    calculateHospitalBedsAvailability();
 
     // compute code challenge -3
     calculationICURequirement();

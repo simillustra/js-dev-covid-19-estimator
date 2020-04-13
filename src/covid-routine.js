@@ -206,6 +206,7 @@ function initCovidEstimator(data) {
     // return responses
     return estimatesdDataStored;
   }
+
   throw new Error('Error in data Entry');
 }
 

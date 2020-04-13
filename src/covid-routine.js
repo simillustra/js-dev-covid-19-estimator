@@ -180,6 +180,13 @@ function calculateCostImapctOnEconomy() {
   estimatesdDataStored.severeImpact.dollarsInFlight = saveSeverDollarInFlight;
 }
 
+/**
+   * @function initCovidEstimator
+   * @param data
+   * @returns estimatesdDataStored
+   * @description estimator entry point
+   */
+
 function initCovidEstimator(data) {
   if (data instanceof Object && data !== null) {
     // initialize variables

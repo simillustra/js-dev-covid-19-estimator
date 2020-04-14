@@ -1,4 +1,10 @@
 /* eslint-disable max-len */
+/**
+ * @author S.A.V.I.O.U.R
+ * @description COVID-19 CODE CHALLENGE JS VERSION ENTRY
+ * @license
+ */
+// Define Constants
 import {
   NORMAL_INFECTION_GROWTH_RATE,
   SEVERE_INFECTION_GROWTH_RATE,

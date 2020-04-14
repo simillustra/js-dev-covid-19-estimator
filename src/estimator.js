@@ -1,5 +1,3 @@
-import initCovidEstimator from './covid-routine';
-
-const covid19ImpactEstimator = (data) => initCovidEstimator(data);
+const covid19ImpactEstimator = (data) => data;
 
 export default covid19ImpactEstimator;

@@ -1,7 +1,0 @@
-// Defining covid-19 constants..........
-export const NORMAL_INFECTION_GROWTH_RATE = 10;
-export const SEVERE_INFECTION_GROWTH_RATE = 50;
-export const PERCENTAGE_POSITIVE_CASES = (15 / 100);
-export const PERCENTAGE_HOSPITAL_BED_AVAILABILITY = (35 / 100);
-export const PERCENTAGE_CASES_NEEDS_FOR_ICU_CARE = (5 / 100);
-export const PERCENTAGE_CASES_NEEDS_FOR_VENTILATION = (2 / 100);
